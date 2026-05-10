@@ -38,10 +38,10 @@ AutoDL 默认很多东西都会安装到系统盘 `/root`。
 
 AutoDL 通常有两种盘：
 
-| 路径 | 作用 | 特点 |
-|---|---|---|
-| `/` | 系统盘 | 小，容易爆 |
-| `/root/autodl-tmp` | 数据盘 | 大，用来放环境和项目 |
+| 路径 | 作用 | 特点 | 大小 |
+|---|---|---|---|
+| `/` | 系统盘 | 小，容易爆 | 30GB |
+| `/root/autodl-tmp` | 数据盘 | 大，用来放环境和项目 | 50GB(可付费扩容) |
 
 默认很多东西会写入：
 
@@ -91,7 +91,7 @@ bash Miniconda3-latest-Linux-x86_64.sh
 
 ---
 
-## 2.4 最关键的一步
+## 2.4 最关键的一步（seriously 我就踩了这个坑）
 
 安装过程中会出现：
 
@@ -182,7 +182,7 @@ conda activate base
 conda config --set solver classic
 ```
 
-新版 libmamba 有时会兼容性不好。
+新版 libmamba 有时会兼容性不好（可能会遇到报错，切换成 classic 就可以跑）。
 
 ---
 
@@ -194,7 +194,7 @@ conda config --add pkgs_dirs /root/autodl-tmp/miniconda3/pkgs
 
 ---
 
-## 4.3 清理旧缓存
+## 4.3 清理旧缓存（新实例貌似没啥用，但有比没有好）
 
 ```bash
 conda clean -a -y
@@ -216,7 +216,7 @@ conda config --show pkgs_dirs
 
 ---
 
-# 5. 配置 pip / HuggingFace / torch 缓存
+# 5. 配置 pip / HuggingFace / torch 等缓存
 
 ## 5.1 创建缓存目录
 
@@ -268,7 +268,7 @@ source ~/.bashrc
 nvidia-smi
 ```
 
-如果正常，会看到 GPU 型号。
+如果正常，会看到 GPU 型号（如果你是无卡模式是看不到的，别慌）。
 
 例如：
 
@@ -335,7 +335,7 @@ echo $CUDA_HOME
 
 # 8. 创建 conda 环境
 
-推荐：
+举例（要根据你的项目环境要求来配置）：
 
 ```bash
 conda create -n myenv python=3.10 -y
@@ -397,7 +397,7 @@ bash install_env.sh
 
 ---
 
-# 10. 下载模型权重
+# 10. 下载模型权重（optional）
 
 很多项目需要下载模型。
 
@@ -462,7 +462,7 @@ nvidia-smi
 
 ---
 
-# 12. 常见错误总结
+# 12. 常见错误总结（速查）
 
 ---
 
@@ -587,7 +587,7 @@ export CUDA_HOME=/usr/local/cuda
 
 ---
 
-# 14. 最重要的一句话
+# 14. Last but not least
 
 真正容易出问题的不是 Python 本身，而是：
 
@@ -603,4 +603,4 @@ export CUDA_HOME=/usr/local/cuda
 所有环境和缓存都在 /root/autodl-tmp
 ```
 
-后面的开发会稳定很多。
+后面的开发会稳定很多（希望吧）。
